@@ -1,0 +1,44 @@
+/* Base styles */
+:root {
+    /* Light Mode Colors */
+    --color-background: oklch(0.9278 0.0046 34.31) /* #eae6e5 */;
+    --color-primary: oklch(0.6142 0.0701 163.87) /* #5b9279 */;
+    --color-secondary: oklch(0.7882 0.0918 150.09) /* #8FCB9B */;
+    --color-accent: oklch(0.6097 0.0266 63.23) /* #8f8073 */;
+    --color-text: oklch(0.3073 0.0029 17.31) /* #312f2f */;
+    --color-text-accent: var(--color-background, #eae6e5);
+    --color-link: color-mix(in oklch, var(--color-text), var(--color-accent) 60% );
+    --color-link-hover: var(--color-accent);
+    --color-button: var(--color-secondary);
+    --color-button-hover: color-mix(in oklch, var(--color-button), black 15% );
+
+    /* Universal variables */
+    --font-headers: 'Rock Salt', cursive;
+    --font-sans: 'Inter Variable', system-ui, sans-serif;
+    --font-serif: Georgia, serif;
+
+    --base-spacing: 1rem;
+    --border-radius: 1rem;
+}
+
+.dark-theme {
+    --color-background: oklch(0.3073 0.0029 17.31) /* #312f2f */;
+    --color-primary: color-mix(in oklch, oklch(0.6142 0.0701 163.87) /* #5b9279 */, black 30% );
+    --color-secondary: color-mix(in oklch, #8fcb9b, black 30% );
+    --color-accent: color-mix(in oklch,oklch(0.6097 0.0266 63.23), black 20%) /* #8f8073 */;
+    --color-text: oklch(0.9278 0.0046 34.31) /* #eae6e5 */;
+    --color-link: color-mix(in oklch, var(--color-text), var(--color-accent) 60% );
+    --color-link-hover: color-mix(in oklch, var(--color-link), oklch(0.3073 0.0029 17.31) /* #312f2f */ 40% );
+    --color-button: var(--color-secondary);
+    --color-button-hover: color-mix(in oklch, var(--color-button), black 15% );
+}
+
+body{
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+}
+
+.site-header {
+    background-color: var(--color-primary);
+}
