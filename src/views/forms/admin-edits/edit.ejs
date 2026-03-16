@@ -1,0 +1,24 @@
+<%- include('../../partials/header') %>
+
+<main>
+    <h1><%= title %></h1>
+
+    <form method="POST" action="/<%= category.id %>/edit">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= category.name %>" required>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= category.description %></textarea>
+        </div>
+
+        <button type="submit">Update Category</button>
+        <a href="/register/list">Cancel</a>
+    </form>
+</main>
+
+<%- include('../../partials/footer') %>
+
+<!-- Fine tune to actual functionality and add edit vehicle page. -->
