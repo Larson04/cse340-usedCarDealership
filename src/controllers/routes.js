@@ -1,14 +1,17 @@
-import { homePage } from './index.js';
-import { catalogPage, courseDetailPage } from './catalog/catalog.js';
+import { homePage } from './home.js';
+import { vehicleCatalogPage, vehicleDetailPage } from '../controllers/inventory/catalog.js';
 import contactRoutes from './forms/contact.js';
 import registrationRoutes from './forms/registration.js';
 import loginRoutes from './forms/login.js';
 import { processLogout, showDashboard } from './forms/login.js';
 import { requireLogin } from '../middleware/auth.js';
+import reviewsRoutes from './forms/reviews.js';
+import serviceRequestRoutes from './forms/requests.js';
 import { Router } from 'express';
 
 // Create a new router instance
 const router = Router();
+
 
 // Add catalog-specific styles to all catalog routes
 router.use('/catalog', (req, res, next) => {
@@ -37,19 +40,9 @@ router.use('/login', (req, res, next) => {
 // Home and basic pages
 router.get('/', homePage);
 
-// Course catalog routes
-router.get('/catalog', catalogPage);
-router.get('/catalog/:courseSlug', courseDetailPage);
-
-// Faculty routes
-router.get('/faculty', facultyListPage);
-router.get('/faculty/:facultySlug', facultyDetailPage);
-
-// Demo page with special middleware
-router.get('/demo', addDemoHeaders, demoPage);
-
-// Route to trigger a test error
-router.get('/test-error', testErrorPage);
+// Vehicle inventory pages
+router.get('/inventory', vehicleCatalogPage);
+router.get('/inventory/:vehicleId', vehicleDetailPage);
 
 // Contact form routes
 router.use('/contact', contactRoutes);
@@ -63,5 +56,11 @@ router.use('/login', loginRoutes);
 // Authentication-related routes at root level
 router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
+
+// Reviews routes (all require login)
+router.use('/reviews', requireLogin, reviewsRoutes);
+
+// Service requests routes (all require login)
+router.use('/requests', requireLogin, serviceRequestRoutes);
 
 export default router;

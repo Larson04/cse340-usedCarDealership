@@ -1,0 +1,78 @@
+<%- include('../../partials/header.ejs') %>
+
+<main class="reviews-container">
+    <h1>Reviews</h1>
+
+    <!-- Admin/Employee Filters -->
+    <% if(user.role === 'admin' || user.role === 'employee') { %>
+        <section class="filters">
+            <form action="/reviews" method="GET" class="filter-form">
+                <!-- Filter by User -->
+                <label for="filterUser">User:</label>
+                <select name="userId" id="filterUser">
+                    <option value="">All Users</option>
+                    <% allUsers.forEach(u => { %>
+                        <option value="<%= u.id %>" <%= filter.userId == u.id ? 'selected' : '' %>><%= u.name %></option>
+                    <% }) %>
+                </select>
+
+                <!-- Filter by Date -->
+                <label for="filterDate">Date:</label>
+                <input type="date" name="date" id="filterDate" value="<%= filter.date || '' %>">
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </section>
+    <% } %>
+
+    <!-- Reviews Table -->
+    <% if(reviews.length === 0) { %>
+        <p>No reviews found.</p>
+    <% } else { %>
+        <table class="reviews-table">
+            <thead>
+                <tr>
+                    <% if(user.role === 'admin' || user.role === 'employee') { %>
+                        <th>User</th>
+                    <% } %>
+                    <th>Vehicle</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Date Submitted</th>
+                    <% if(user.role === 'admin' || user.role === 'employee' || user.role === 'user') { %>
+                        <th>Actions</th>
+                    <% } %>
+                </tr>
+            </thead>
+            <tbody>
+                <% reviews.forEach(review => { %>
+                    <tr>
+                        <% if(user.role === 'admin' || user.role === 'employee') { %>
+                            <td><%= review.userName %></td>
+                        <% } %>
+                        <td><%= review.vehicle %></td>
+                        <td><%= review.rating %> Star<%= review.rating > 1 ? 's' : '' %></td>
+                        <td><%= review.comment %></td>
+                        <td><%= review.dateSubmitted.toDateString() %></td>
+                        <td>
+                            <% if(review.userId === user.id || user.role === 'admin' || user.role === 'employee') { %>
+                                <a href="/reviews/<%= review.id %>/edit" class="btn-action">Edit</a>
+                                <form action="/reviews/<%= review.id %>?_method=DELETE" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-action btn-delete">Delete</button>
+                                </form>
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+
+    <% if(user.role === 'user') { %>
+        <a href="/reviews/new" class="btn-submit">Leave a Review</a>
+    <% } %>
+</main>
+
+<%- include('../../partials/footer.ejs') %>

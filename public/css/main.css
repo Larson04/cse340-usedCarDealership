@@ -42,3 +42,7 @@ body{
 .site-header {
     background-color: var(--color-primary);
 }
+
+img {
+    max-width: 200px;;
+}

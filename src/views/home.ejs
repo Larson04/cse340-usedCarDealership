@@ -1,7 +1,117 @@
 <%- include('./partials/header.ejs') %>
 <main>
-    <h1><%= title %></h1>
-    <p> Bello. </p>
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Quality Used Cars You Can Trust</h1>
+            <p>Affordable, reliable vehicles for every budget. Browse our inventory or schedule a test drive today.</p>
+            
+            <div class="hero-buttons">
+                <a href="/inventory" class="btn">View Inventory</a>
+                <a href="/financing" class="btn secondary">Apply for Financing</a>
+                <a href="/contact" class="btn outline">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="about">
+        <h2>About Us</h2>
+        <p>
+            Welcome to <strong>Hometown Motors</strong>, your trusted source for quality pre-owned vehicles.
+            We offer a wide selection of cars, trucks, and SUVs at competitive prices.
+        </p>
+        <p>
+            Our mission is to make your car-buying experience easy, transparent, and stress-free.
+        </p>
+    </section>
+
+    <!-- FEATURED INVENTORY -->
+    <section class="featured-vehicles">
+        <h2>Featured Vehicles</h2>
+        <div class="featured-grid">
+            <% featuredVehicles.forEach(vehicle => { %>
+            <div class="vehicle-card">
+                <a href="/vehicles/<%= vehicle.id %>">
+                <img src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
+                <div class="vehicle-info">
+                    <h3><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h3>
+                    <p class="price">$<%= vehicle.price.toLocaleString() %></p>
+                </div>
+                </a>
+            </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-us">
+        <h2>Why Choose Us</h2>
+        <ul>
+            <li>Thoroughly inspected, reliable vehicles</li>
+            <li>Competitive, transparent pricing</li>
+            <li>Financing options for all credit types</li>
+            <li>Friendly, no-pressure sales team</li>
+            <li>Trusted by local customers</li>
+        </ul>
+    </section>
+
+    <!-- FINANCING -->
+    <section class="financing">
+        <h2>Financing Options</h2>
+        <p>
+            We partner with trusted lenders to provide flexible financing for every situation.
+            Good credit, bad credit, or no credit—we can help.
+        </p>
+        <a href="/financing" class="btn">Apply for Financing Today</a>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <ul>
+            <li>Vehicle trade-ins</li>
+            <li>Maintenance and service referrals</li>
+            <li>Extended warranties</li>
+            <li>Vehicle history reports</li>
+        </ul>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <p>“Great experience! The process was smooth and the staff was very helpful.”</p>
+        </div>
+        <div class="review">
+            <p>“Found exactly what I needed at a great price.”</p>
+        </div>
+        <div class="review">
+            <p>“Honest dealership with quality cars.”</p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <p> address</p>
+        <p> phone</p>
+        <p> email</p>
+
+        <h3>Hours</h3>
+        <p>Mon-Fri: 9AM-7PM</p>
+        <p>Sat: 9AM-6PM</p>
+        <p>Sun: Closed</p>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta">
+        <h2>Ready to find your next car?</h2>
+        <div class="cta-links">
+            <a href="/inventory">Browse Inventory</a> |
+            <a href="/contact">Contact Us</a>
+        </div>
+    </section>
     
 </main>
 <%- include('./partials/footer.ejs') %>

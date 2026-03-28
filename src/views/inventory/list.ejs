@@ -1,0 +1,34 @@
+<%- include('../partials/header.ejs') %>
+<main>
+    <header>
+        <h1>Vehicle Inventory</h1>
+    </header>
+
+    <!-- Sort Options -->
+    <div class="sort-options">
+        <span>Sort by:</span>
+        <a href="?sort=category" class="<%= currentSort === 'category' ? 'active' : '' %>">Category</a> |
+        <a href="?sort=make" class="<%= currentSort === 'make' ? 'active' : '' %>">Make</a> |
+        <a href="?sort=model" class="<%= currentSort === 'model' ? 'active' : '' %>">Model</a> |
+        <a href="?sort=year" class="<%= currentSort === 'year' ? 'active' : '' %>">Year</a> |
+        <a href="?sort=price" class="<%= currentSort === 'price' ? 'active' : '' %>">Price</a>
+    </div>
+
+    <!-- Vehicle List -->
+    <div class="vehicle-list">
+        <% vehicles.forEach(vehicle => { %>
+            <div class="vehicle-card">
+                <a href="/inventory/<%= vehicle.id %>">
+                    <img 
+                    src="<%= vehicle.primaryImage?.url %>" 
+                    alt="<%= vehicle.primaryImage?.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
+                    <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
+                </a>
+                <p>Category: <%= vehicle.category %></p>
+                <p>Mileage: <%= vehicle.mileage.toLocaleString() %> miles</p>
+                <p>Price: $<%= vehicle.price.toLocaleString() %></p>
+            </div>
+        <% }) %>
+    </div>
+</main>
+<%- include('../partials/footer.ejs') %>

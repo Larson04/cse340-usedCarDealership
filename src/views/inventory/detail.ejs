@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+<main>
+    <header>
+        <h1><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h1>
+    </header>
+
+    <!-- Vehicle Images Gallery -->
+    <div class="vehicle-gallery">
+        <% vehicle.images.forEach(url => { %>
+            <img src="<%= url %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
+        <% }) %>
+    </div>
+
+    <!-- Vehicle Details -->
+    <div class="vehicle-details">
+        <p><strong>Category:</strong> <%= vehicle.category %></p>
+        <p><strong>Price:</strong> $<%= vehicle.price.toLocaleString() %></p>
+        <p><strong>Mileage:</strong> <%= vehicle.mileage.toLocaleString() %> miles</p>
+        <p><strong>Description:</strong> <%= vehicle.description %></p>
+    </div>
+
+    <a href="/inventory" class="back-link">← Back to Inventory</a>
+    <a href="../forms/reviews/" class="btn-submit">Leave a Review</a>
+</main>
+<%- include('../partials/footer') %>

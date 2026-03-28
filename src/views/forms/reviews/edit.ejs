@@ -1,0 +1,38 @@
+<%- include('../../partials/header.ejs') %>
+
+<main class="edit-review-container">
+    <h1>Edit Your Review</h1>
+
+    <form action="/reviews/<%= review.id %>?_method=PUT" method="POST" class="edit-review-form">
+        <!-- Vehicle Info (readonly) -->
+        <div class="form-group">
+            <label for="vehicle">Vehicle:</label>
+            <input type="text" id="vehicle" value="<%= review.vehicle %>" readonly>
+        </div>
+
+        <!-- Rating -->
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating" required>
+                <% for(let i = 1; i <= 5; i++) { %>
+                    <option value="<%= i %>" <%= review.rating === i ? 'selected' : '' %>>
+                        <%= i %> Star<%= i > 1 ? 's' : '' %>
+                    </option>
+                <% } %>
+            </select>
+        </div>
+
+        <!-- Comment -->
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment" rows="5" required><%= review.comment %></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit">Update Review</button>
+    </form>
+
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+</main>
+
+<%- include('../../partials/footer.ejs') %>
