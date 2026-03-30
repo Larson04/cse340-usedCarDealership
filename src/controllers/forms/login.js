@@ -21,6 +21,8 @@ const processLogin = async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
 
+    console.log('errors:',errors);
+
     if (!errors.isEmpty()) {
          errors.array().forEach(error => {
             req.flash('error', error.msg);
@@ -30,14 +32,19 @@ const processLogin = async (req, res) => {
 
     const { email, password } = req.body;
 
+    console.log('email:',email);
+    console.log('password:',password);
+
     try {
         const user = await findUserByEmail(email);
+        console.log('user:',user);
         if(!user) {
             req.flash('error', 'Invalid email or password');
             return res.redirect('/login');
         }
 
         const passwordMatch = await verifyPassword(password, user.password);
+        console.log('passwordMatch:',passwordMatch);
         if (!passwordMatch) {
             req.flash('error', 'Invalid email or password');
             return res.redirect('/login');
@@ -48,6 +55,8 @@ const processLogin = async (req, res) => {
 
         req.session.user = user;
         req.flash('success', 'Welcome back!');
+        console.log('success;');
+        console.log('redirect dashboard');
         res.redirect('/dashboard');
     } catch (error) {
         console.error('Error saving user:', error);
@@ -102,25 +111,25 @@ export const processLogout = (req, res) => {
 /**
  * Display protected dashboard (requires login).
  */
-export const showDashboard = (req, res) => {
-    const user = req.session.user;
-    const sessionData = req.session;
+// export const showDashboard = (req, res) => {
+//     const user = req.session.user;
+//     const sessionData = req.session;
 
-    // Security check! Ensure user and sessionData do not contain password field
-    if (user && user.password) {
-        console.error('Security error: password found in user object');
-        delete user.password;
-    }
-    if (sessionData.user && sessionData.user.password) {
-        console.error('Security error: password found in sessionData.user');
-        delete sessionData.user.password;
-    }
+//     // Security check! Ensure user and sessionData do not contain password field
+//     if (user && user.password) {
+//         console.error('Security error: password found in user object');
+//         delete user.password;
+//     }
+//     if (sessionData.user && sessionData.user.password) {
+//         console.error('Security error: password found in sessionData.user');
+//         delete sessionData.user.password;
+//     }
 
-    res.render('dashboard', {
-        title: 'Dashboard', 
-        user, 
-        sessionData });
-};
+//     res.render('dashboard', {
+//         title: 'Dashboard', 
+//         user, 
+//         sessionData });
+// };
 
 // Routes
 router.get('/', showLoginForm);

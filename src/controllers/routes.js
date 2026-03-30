@@ -3,7 +3,8 @@ import { vehicleCatalogPage, vehicleDetailPage } from '../controllers/inventory/
 import contactRoutes from './forms/contact.js';
 import registrationRoutes from './forms/registration.js';
 import loginRoutes from './forms/login.js';
-import { processLogout, showDashboard } from './forms/login.js';
+import { processLogout} from './forms/login.js';
+import { showDashboard } from './dashboard.js';
 import { requireLogin } from '../middleware/auth.js';
 import reviewsRoutes from './forms/reviews.js';
 import serviceRequestRoutes from './forms/requests.js';
