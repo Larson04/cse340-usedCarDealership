@@ -7,8 +7,8 @@
             <p>Affordable, reliable vehicles for every budget. Browse our inventory or schedule a test drive today.</p>
             
             <div class="hero-buttons">
-                <a href="/inventory" class="btn">View Inventory</a>
-                <a href="/contact" class="btn outline">Contact Us</a>
+                <a href="/inventory" class="button">View Inventory</a>
+                <a href="/contact" class="button outline">Contact Us</a>
             </div>
         </div>
     </header>
@@ -32,7 +32,7 @@
             <% featuredVehicles.forEach(vehicle => { %>
             <div class="vehicle-card">
                 <a href="/vehicles/<%= vehicle.id %>">
-                <img src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
+                <img class="vehicle-image" src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
                 <div class="vehicle-info">
                     <h3><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h3>
                     <p class="price">$<%= vehicle.price.toLocaleString() %></p>

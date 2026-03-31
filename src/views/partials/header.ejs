@@ -15,6 +15,7 @@
         ws.onclose = () => {
             setTimeout(() => location.reload(), 2000);
         };
+        
     </script>
 <% } %>
     <meta charset="UTF-8">
@@ -23,35 +24,35 @@
     <link rel="stylesheet" href="/css/main.css">
     <%- renderStyles() %>
     <%- renderScripts() %>
+    <script type="module" src="/js/nav.js" defer></script>
 </head>
 <body class="<%= bodyClass %>">
     <header class="site-header">
-        <nav>
-            <ul>
+        <a href="/"><img class="nav-logo" src="/images/logo.png" alt="Logo"></a>
+        <nav class="site-nav">
+            <ul class="nav-links">
                 <!-- Always visible links -->
-                <li><a href="/">Home</a></li>
-                <li><a href="/inventory">Inventory</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="/inventory">Inventory</a></li>
+                <li><a class="nav-link" href="/contact">Contact</a></li>
 
                 <!-- Only visible when logged in -->
                 <% if (isLoggedIn) { %>
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/register/list">All Users</a></li>
-                    <li><a href="/contact/responses">Contact Responses</a></li>
-                    <li><a href="/reviews">My Reviews</a></li>
-                    <li><a href="/requests">My Service Requests</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a class="nav-link"" href="/dashboard">Dashboard</a></li>
+                    <li><a class="nav-link" href="/register/list">All Users</a></li>
+                    <li><a class="nav-link" href="/contact/responses">Contact Responses</a></li>
+                    <li><a class="nav-link" href="/reviews">My Reviews</a></li>
+                    <li><a class="nav-link" href="/requests">My Service Requests</a></li>
+                    <li><a class="nav-link" href="/logout">Logout</a></li>
                 <% } %>
 
                 <!-- Only visible when NOT logged in -->
                 <% if (!isLoggedIn) { %>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
+                    <li><a class="nav-link" href="/login">Login</a></li>
+                    <li><a class="nav-link" href="/register">Register</a></li>
                 <% } %>
             </ul>
         </nav>
-
-        <p><%- greeting %></p>
     </header>
 
     <% 
