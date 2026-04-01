@@ -199,7 +199,7 @@ main{
         background-color: var(--color-primary);
         border-radius: var(--border-radius);
         padding: var(--base-spacing);
-        margin-bottom: calc(var(--base-spacing) * 2);
+        margin: calc(var(--base-spacing) * 2);
         text-align: center;
 
         a{
