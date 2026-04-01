@@ -26,6 +26,8 @@
     --border-radius: 1rem;
 
     --button-padding: .75rem;
+
+    
 }
 
 .dark-theme {
@@ -39,7 +41,13 @@
     --color-link-hover: color-mix(in oklch, var(--color-link), oklch(0.3073 0.0029 17.31) /* #312f2f */ 40% );
 
     --color-button: var(--color-secondary);
-    --color-button-hover: color-mix(in oklch, var(--color-button), black 15% );}
+    --color-button-hover: color-mix(in oklch, var(--color-button), black 15% );
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
 
 body{
     width: 100%;
@@ -50,27 +58,34 @@ body{
 
 .site-header{
    width: 100%;
-   height: var(--nav-height);
    background-color: var(--color-primary);
    border-bottom: 1px solid var(--color-border);
+   padding: calc(var(--base-spacing) * 0.5);
+   display: grid;
+   grid-template-areas: 
+   "logo name name"
+   "nav  nav nav";
+   grid-template-columns: 1fr 1fr 1fr;
    
    .nav-logo{
-       width: 25%;
+       width: 100%;
        border-radius: 50%;
-   
-       @media screen and (min-width: 768px) {
-           width: 10%;
-       }
+       grid-area: logo;
+       padding: calc(var(--base-spacing) * 0.5);
+   }
+
+   .name{
+        grid-area: name;
+        text-align: center;
+        font-size: 1.5rem;
    }
 
    .site-nav{
+      grid-area: nav;
       display: flex;
       flex-direction: row;
       align-items: center;
       max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-      height: var(--nav-height);
       justify-content: space-between;
       
       .nav-links{
@@ -142,6 +157,7 @@ main{
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: var(--base-spacing);
 
         p{
             color: var(--color-text-accent);
@@ -163,32 +179,73 @@ main{
     }
 }
 
-.vehicle-card{
-    background-color: var(--color-primary);
-    border-radius: var(--border-radius);
+.about{
     padding: var(--base-spacing);
     text-align: center;
 
-    .vehicle-image{
-        width: 100%;
-        border-radius: var(--border-radius);
+    p{
+        text-align: start;
     }
+}
 
-    .vehicle-info {
-        background-color: var(--color-background);
+.featured-grid{
+    display: grid;
+    text-align: center;
+    gap: var(--base-spacing );
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    .vehicle-card{
+        width: 100%;
+        background-color: var(--color-primary);
         border-radius: var(--border-radius);
-        
-        .price{
-            background-color: var(--color-button);
-            color: var(--color-text);
-            border: none;
-            border-radius: calc(var(--border-radius) * .5);
-            padding: calc(var(--base-spacing) * .5) calc(var(--base-spacing) * .35);
-            cursor: pointer;
+        padding: var(--base-spacing);
+        margin-bottom: calc(var(--base-spacing) * 2);
+        text-align: center;
 
-            &:hover{
-                background-color: var(--color-button-hover);
-                color: var(--color-text-accent)
+        a{
+            text-decoration: none;
+            
+            h3{
+                color: var(--color-text);
+            }
+    
+            .vehicle-image{
+                width: 100%;
+                border-radius: var(--border-radius);
+            }
+        }
+
+        .vehicle-info {
+            display: grid;
+            grid-template-areas:
+            "description description"
+            "price price"
+            "date date";
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
+            background-color: var(--color-background);
+            border-radius: var(--border-radius);
+            align-items: center;
+            
+            .description{
+                grid-area: description;
+                text-align: center;
+            }
+
+            .price{
+                grid-area: price;
+                background-color: var(--color-button);
+                color: var(--color-text);
+                border: none;
+                border-radius: calc(var(--border-radius) * .5);
+                padding: calc(var(--base-spacing) * .5) calc(var(--base-spacing) * .35);
+                cursor: pointer;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .date{
+                grid-area: date;
+                text-align: center;
             }
         }
     }

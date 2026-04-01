@@ -26,18 +26,22 @@
     </section>
 
     <!-- FEATURED INVENTORY -->
+    <h2>Featured Vehicles</h2>
     <section class="featured-vehicles">
-        <h2>Featured Vehicles</h2>
         <div class="featured-grid">
             <% featuredVehicles.forEach(vehicle => { %>
             <div class="vehicle-card">
                 <a href="/vehicles/<%= vehicle.id %>">
-                <img class="vehicle-image" src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
-                <div class="vehicle-info">
                     <h3><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h3>
-                    <p class="price">$<%= vehicle.price.toLocaleString() %></p>
-                </div>
+                    <img class="vehicle-image" src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year 
+                    + ' ' + vehicle.make + ' ' + vehicle.model %>">
                 </a>
+                <div class="vehicle-info">
+                    <p class="description"><%= vehicle.description %> <%= vehicle.mileage %></p>
+                    <p class="price">$<%= vehicle.price.toLocaleString() %></p>
+                    <p class="date">Created at: <%= vehicle.createdAt %> | Updated At:<%= vehicle.updatedAt %></p>
+                </div>
+                
             </div>
             <% }) %>
         </div>

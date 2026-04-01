@@ -15,7 +15,7 @@ const router = Router();
 
 
 // Add catalog-specific styles to all catalog routes
-router.use('/catalog', (req, res, next) => {
+router.use('/inventory', (req, res, next) => {
     res.addStyle('<link rel="stylesheet" href="/css/catalog.css">');
     next();
 });
