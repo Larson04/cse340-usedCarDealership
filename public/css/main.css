@@ -7,6 +7,7 @@
     --color-accent: oklch(0.6097 0.0266 63.23) /* #8f8073 */;
 
     --color-text: oklch(0.3073 0.0029 17.31) /* #312f2f */;
+    --color-text-muted: color-mix(in oklch, var(--color-text), oklch(0.9278 0.0046 34.31) 30% );
     --color-text-accent: var(--color-background, #eae6e5);
     --color-link: color-mix(in oklch, var(--color-text), var(--color-accent) 60% );
     --color-link-hover: var(--color-accent);
