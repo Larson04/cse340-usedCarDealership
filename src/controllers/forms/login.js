@@ -60,9 +60,7 @@ const processLogin = async (req, res) => {
 
         req.session.user = user;
         req.flash('success', 'Welcome back!');
-        console.log('success;');
-        console.log('redirect dashboard');
-        res.redirect('/dashboard');
+        res.redirect('/');
     } catch (error) {
         console.error('Error saving user:', error);
         req.flash('error', 'An error occurred. Please try again.');

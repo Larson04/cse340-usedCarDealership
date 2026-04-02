@@ -84,12 +84,12 @@ app.set('views', path.join(__dirname, 'src/views'));
  * Global Middleware
  */
 
+// Global middleware
+app.use(globalMiddleware);
 
 // Flash message middleware (must come after session and global middleware)
 app.use(flash);
 
-// Global middleware
-app.use(globalMiddleware);
 
 /**
  * Routes
@@ -119,10 +119,20 @@ app.use((err, req, res, next) => {
    
     // Prepare data for the template
     const context = {
+        isLoggedIn: res.locals.isLoggedIn,
+        currentYear: res.locals.currentYear,
+        greeting: res.locals.greeting,
+        NODE_ENV: res.locals.NODE_ENV,
+        queryParams: res.locals.queryParams,
+        styles: res.locals.styles,
+        scripts: res.locals.scripts,
+        renderStyles: res.locals.renderStyles,
+        renderScripts: res.locals.renderScripts,
         title: status === 404 ? 'Page Not Found' : 'Server Error',
         error: NODE_ENV === 'production' ? 'An error occurred' : err.message,
         stack: NODE_ENV === 'production' ? null : err.stack,
-        NODE_ENV // Our WebSocket check needs this and its convenient to pass along
+        NODE_ENV, // Our WebSocket check needs this and its convenient to pass along
+        flash: res.locals.flash
     };
    
     // Render the appropriate error template with fallback

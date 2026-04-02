@@ -37,17 +37,6 @@
 
                 <% if (isLoggedIn) { %>
 
-                    <% if (isEmployee) { %>
-                        <!-- Employee Links -->
-                        <li><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                        <li><a class="nav-link" href="/contact/responses">Contact Responses</a></li>
-                    <% } %>
-
-                    <% if (isAdmin) { %>
-                        <!-- Admin Links -->
-                        <li><a class="nav-link" href="/register/list">All Users</a></li>
-                    <% } %>
-
                     <!-- Only visible when logged in -->
                     <li><a class="nav-link" href="/profile">Profile</a></li>
                     <li><a class="nav-link" href="/reviews">Reviews</a></li>
@@ -64,3 +53,21 @@
         </nav>
     </header>
 
+
+     
+    <%
+        const messages = locals.flash ? locals.flash() : { success: [], error: [], warning: [], info: [] };
+        const hasMessages = Object.values(messages).some(arr => arr.length > 0);
+    %>
+
+    <% if (hasMessages) { %>
+        <div class="flash-messages">
+            <% Object.keys(messages).forEach(type => { %>
+                <% messages[type].forEach(message => { %>
+                    <div class="flash <%= type %>">
+                        <%= message %>
+                    </div>
+                <% }); %>
+            <% }); %>
+        </div>
+    <% } %>
