@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 // Import MVC components
 import routes from './src/controllers/routes.js';
-import { addLocalVariables } from './src/middleware/global.js';
+import globalMiddleware from './src/middleware/localVariables.js';
 
 //Import database components
 import { setupDatabase, testConnection } from './src/models/setup.js';
@@ -83,10 +83,13 @@ app.set('views', path.join(__dirname, 'src/views'));
 /**
  * Global Middleware
  */
-app.use(addLocalVariables);
+
 
 // Flash message middleware (must come after session and global middleware)
 app.use(flash);
+
+// Global middleware
+app.use(globalMiddleware);
 
 /**
  * Routes

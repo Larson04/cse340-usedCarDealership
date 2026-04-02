@@ -8,10 +8,16 @@ import { emailExists, saveUser, getAllUsers,
  import { registrationValidation , editValidation} from '../../middleware/validation/forms.js';
 
 const router = Router();
+
+const addRegistrationSpecificStyles = (res) => {
+    res.addStyle('<link rel="stylesheet" href="/css/registration.css">');
+};
+
 /**
  * Display the registration form page.
  */
 const showRegistrationForm = (req, res) => {
+    addRegistrationSpecificStyles(res);
     res.render('forms/registration/form', {
         title: 'User Registration'
     })

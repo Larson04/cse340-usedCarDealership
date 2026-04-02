@@ -1,6 +1,6 @@
 import { getFeaturedVehicles } from '../models/inventory/vehicles.js';
 
-export const homePage = async (req, res) => {
+const homePage = async (req, res) => {
   const featuredVehicles = await getFeaturedVehicles(5, 'year');
   console.log(featuredVehicles);
 
@@ -9,3 +9,5 @@ export const homePage = async (req, res) => {
     featuredVehicles
   });
 };
+
+export { homePage };

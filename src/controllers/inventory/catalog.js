@@ -1,6 +1,10 @@
 import { getVehiclesByCategory } from '../../models/inventory/catalog.js';
 import { getVehicleById } from '../../models/inventory/vehicles.js';
 
+const addCatalogSpecificStyles = (res) => {
+    res.addStyle('<link rel="stylesheet" href="/css/catalog.css">');
+};
+
 /**
  * Handler for the vehicle catalog / inventory page
  */
@@ -15,6 +19,7 @@ export const vehicleCatalogPage = async (req, res, next) => {
     // Fetch the sorted vehicle list
     const vehicles = await getVehiclesByCategory(categoryId, sortBy);
 
+    addCatalogSpecificStyles(res);
     res.render('inventory/list', {
         title: 'Vehicle Inventory',
         currentSort: sortBy,

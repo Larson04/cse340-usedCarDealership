@@ -7,10 +7,15 @@ import { requestValidation } from '../../middleware/validation/forms.js';
 
 const router = Router();
 
+const addRequestSpecificStyles = (res) => {
+    res.addStyle('<link rel="stylesheet" href="/css/requests.css">');
+};
+
 /**
  * Display form to submit a new service request
  */
 const showServiceRequestForm = (req, res) => {
+    addRequestSpecificStyles(res);
     res.render('forms/serviceRequests/form', {
         title: 'Submit Service Request',
         vehicles: req.vehicles || [] // loaded from middleware or route

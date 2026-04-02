@@ -7,10 +7,15 @@ import { reviewValidation } from '../../middleware/validation/forms.js';
 
 const router = Router();
 
+const addReviewSpecificStyles = (res) => {
+    res.addStyle('<link rel="stylesheet" href="/css/reviews.css">');
+};
+
 /**
  * Display form to create a new review
  */
 const showReviewForm = async (req, res) => {
+    addReviewSpecificStyles(res);
     try {
         const vehicles = await getAllVehicles(); // fetch all vehicles from DB
     } catch (error) {
