@@ -1,0 +1,23 @@
+.rating {
+  direction: rtl; /* makes stars fill left to right */
+  display: inline-flex;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 30px;
+  color: gray;
+  cursor: pointer;
+}
+
+.rating input:checked ~ label {
+  color: gold;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: gold;
+}

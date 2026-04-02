@@ -1,17 +1,15 @@
 <%- include('../partials/header.ejs') %>
 <main>
-    <header>
-        <h1>Vehicle Inventory</h1>
-    </header>
+    <h1>Vehicle Inventory</h1>
 
     <!-- Sort Options -->
-    <div class="sort-options">
+    <div class="filter-buttons">
         <span>Sort by:</span>
-        <a href="?sort=category" class="<%= currentSort === 'category' ? 'active' : '' %>">Category</a> |
-        <a href="?sort=make" class="<%= currentSort === 'make' ? 'active' : '' %>">Make</a> |
-        <a href="?sort=model" class="<%= currentSort === 'model' ? 'active' : '' %>">Model</a> |
-        <a href="?sort=year" class="<%= currentSort === 'year' ? 'active' : '' %>">Year</a> |
-        <a href="?sort=price" class="<%= currentSort === 'price' ? 'active' : '' %>">Price</a>
+        <a href="?sort=category" class="filter-button <%= currentSort === 'category' ? 'active' : '' %>">Category</a> |
+        <a href="?sort=make" class="filter-button <%= currentSort === 'make' ? 'active' : '' %>">Make</a> |
+        <a href="?sort=model" class="filter-button <%= currentSort === 'model' ? 'active' : '' %>">Model</a> |
+        <a href="?sort=year" class="filter-button <%= currentSort === 'year' ? 'active' : '' %>">Year</a> |
+        <a href="?sort=price" class="filter-button <%= currentSort === 'price' ? 'active' : '' %>">Price</a>
     </div>
 
     <!-- Vehicle List -->
@@ -20,8 +18,8 @@
             <div class="vehicle-card">
                 <a href="/inventory/<%= vehicle.id %>">
                     <img 
-                    src="<%= vehicle.primaryImage?.url %>" 
-                    alt="<%= vehicle.primaryImage?.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
+                        src="<%= vehicle.image %>" 
+                        alt="<%= vehicle.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
                     <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
                 </a>
                 <p>Category: <%= vehicle.category %></p>

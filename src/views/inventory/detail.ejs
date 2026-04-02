@@ -6,9 +6,9 @@
 
     <!-- Vehicle Images Gallery -->
     <div class="vehicle-gallery">
-        <% vehicle.images.forEach(url => { %>
-            <img src="<%= url %>" alt="<%= vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
-        <% }) %>
+        <img 
+            src="<%= vehicle.image %>" 
+            alt="<%= vehicle.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
     </div>
 
     <!-- Vehicle Details -->
@@ -20,6 +20,6 @@
     </div>
 
     <a href="/inventory" class="back-link">← Back to Inventory</a>
-    <a href="../forms/reviews/" class="btn-submit">Leave a Review</a>
+    <a href="/reviews" class="btn-submit">Leave a Review</a>
 </main>
 <%- include('../partials/footer') %>

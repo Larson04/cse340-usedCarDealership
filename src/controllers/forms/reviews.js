@@ -16,16 +16,9 @@ const addReviewSpecificStyles = (res) => {
  */
 const showReviewForm = async (req, res) => {
     addReviewSpecificStyles(res);
-    try {
-        const vehicles = await getAllVehicles(); // fetch all vehicles from DB
-    } catch (error) {
-        console.error('Error fetching vehicles:', error);
-        req.flash('error', 'Unable to load vehicles.');
-        res.redirect('/dashboard');
-    }
     res.render('forms/reviews/form', {
         title: 'Leave a Review',
-        vehicles
+        
     });
 };
 
@@ -36,10 +29,11 @@ const processReview = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         errors.array().forEach(error => req.flash('error', error.msg));
-        return res.redirect('/reviews/new');
+        return res.redirect('/reviews');
     }
 
-    const { vehicleId, rating, comment } = req.body;
+    console.log(req.body);
+    const { make, model, year, rating, comment } = req.body;
     const userId = req.session.user.id;
 
     try {
@@ -173,10 +167,10 @@ const processDeleteReview = async (req, res) => {
 };
 
 // Routes
-router.get('/new', requireLogin, showReviewForm);
-router.post('/new', requireLogin, reviewValidation, processReview);
+router.get('/', requireLogin, showReviewForm);
+router.post('/', requireLogin, reviewValidation, processReview);
 
-router.get('/', requireLogin, showAllReviews);
+router.get('/list', requireLogin, showAllReviews);
 
 router.get('/:id/edit', requireLogin, showEditReviewForm);
 router.post('/:id/edit', requireLogin, reviewValidation, processEditReview);
@@ -184,3 +178,4 @@ router.post('/:id/edit', requireLogin, reviewValidation, processEditReview);
 router.post('/:id/delete', requireLogin, processDeleteReview);
 
 export default router;
+

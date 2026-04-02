@@ -70,7 +70,9 @@ startSessionCleanup();
  * Configure Express middleware
  */
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1d', // cache files for 1 day
+}));
 // Allow Express to receive and process POST data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

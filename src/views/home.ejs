@@ -31,10 +31,9 @@
         <div class="featured-grid">
             <% featuredVehicles.forEach(vehicle => { %>
             <div class="vehicle-card">
-                <a href="/vehicles/<%= vehicle.id %>">
+                <a href="/inventory/<%= vehicle.id %>">
                     <h3><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h3>
-                    <img class="vehicle-image" src="<%= vehicle.primaryImage %>" alt="<%= vehicle.year 
-                    + ' ' + vehicle.make + ' ' + vehicle.model %>">
+                    <img class="vehicle-image" src="<%= vehicle.image %>" alt="<%= vehicle.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
                 </a>
                 <div class="vehicle-info">
                     <p class="description"><%= vehicle.description %> <%= vehicle.mileage %></p>

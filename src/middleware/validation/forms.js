@@ -105,32 +105,46 @@ export const editValidation = [
  * Validation rules for submitting a vehicle review
  */
 export const reviewValidation = [
-    body('vehicleId')
+    body('make')
+        .trim()
         .notEmpty()
-        .withMessage('Vehicle selection is required')
-        .isInt({ min: 1 })
-        .withMessage('Invalid vehicle selected'),
+        .withMessage('Vehicle make is required')
+        .isLength({ min: 2 })
+        .withMessage('Make must be at least 2 characters'),
 
-    body('rating')
+    body('model')
+        .trim()
         .notEmpty()
-        .withMessage('Rating is required')
-        .isInt({ min: 0, max: 5 })
-        .withMessage('Rating must be an integer between 1 and 5'),
+        .withMessage('Vehicle model is required')
+        .isLength({ min: 2 })
+        .withMessage('Model must be at least 2 characters'),
 
-    body('review')
+    body('year')
+        .notEmpty()
+        .withMessage('Year is required')
+        .isInt({ min: 1900, max: new Date().getFullYear() + 1 })
+        .withMessage('Enter a valid year'),
+
+    body('comment')
         .trim()
         .isLength({ min: 10, max: 2000 })
-        .withMessage('Review must be between 10 and 2000 characters')
+        .withMessage('Comment must be between 10 and 2000 characters')
         .matches(/^[a-zA-Z0-9\s.,!?'"-]+$/)
-        .withMessage('Review contains invalid characters')
+        .withMessage('Comment contains invalid characters')
         .custom((value) => {
             const words = value.split(/\s+/);
             const uniqueWords = new Set(words);
             if (words.length > 20 && uniqueWords.size / words.length < 0.3) {
-                throw new Error('Review appears to be spam');
+                throw new Error('Comment appears to be spam');
             }
             return true;
-        })
+        }),
+
+    body('rating')
+        .notEmpty()
+        .withMessage('Rating is required')
+        .isInt({ min: 1, max: 5 }) // ⭐ fixed range
+        .withMessage('Rating must be between 1 and 5')
 ];
 
 /**

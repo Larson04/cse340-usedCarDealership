@@ -1,0 +1,26 @@
+main{
+    width: 100%;
+    display: block;
+}
+
+.filter-button{
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    transition: color var(--transition-base);
+    &:hover{
+        color: var(--color-link);
+    }
+    &::after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-link);
+        transition: width var(--transition-base);
+    }
+    &:hover::after{
+        width: 100%;
+    }
+}
+

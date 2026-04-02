@@ -69,7 +69,7 @@ body{
    grid-template-columns: 1fr 1fr 1fr;
    
    .nav-logo{
-       width: 100%;
+       width: 100px;
        border-radius: 50%;
        grid-area: logo;
        padding: calc(var(--base-spacing) * 0.5);

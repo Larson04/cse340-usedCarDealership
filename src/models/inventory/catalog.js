@@ -1,12 +1,13 @@
 import db from '../db.js';
 
 /**
- * Core function that gets all vehicles (optionally filtered by category)
+ * Get all vehicles (optionally filtered by category)
  * with sorting by category, make, model, year, price, or mileage.
+ * Each vehicle has only one image.
  * 
  * @param {number|null} categoryId - Category ID to filter by (optional)
  * @param {string} sortBy - 'category', 'make', 'model', 'year', 'price', 'mileage' (default: 'price')
- * @returns {Promise<Array>} Array of vehicle objects with images
+ * @returns {Promise<Array>} Array of vehicle objects with single image
  */
 export const getVehiclesByCategory = async (categoryId = null, sortBy = 'price') => {
     // Optional WHERE clause
@@ -25,63 +26,40 @@ export const getVehiclesByCategory = async (categoryId = null, sortBy = 'price')
 
     const orderByClause = orderByMap[sortBy] || orderByMap.price;
 
-    // Query vehicles with category and images
+    // Query vehicles with category and single image
     const query = `
         SELECT 
             v.id, v.year, v.make, v.model,
             v.price, v.mileage, v.description,
             c.name AS category_name,
-            img.image_url, img.is_primary
+            img.image_url,
+            img.alt_text AS alt
         FROM vehicles v
         JOIN categories c ON v.category_id = c.id
         LEFT JOIN vehicle_images img ON img.vehicle_id = v.id
         WHERE ${whereClause}
-        ORDER BY ${orderByClause}, v.id, img.is_primary DESC
+        ORDER BY ${orderByClause}, v.id
     `;
 
     const result = await db.query(query, params);
 
-    // Transform and group images per vehicle
-    const vehiclesMap = new Map();
-
-    result.rows.forEach(vehicle => {
-        if (!vehiclesMap.has(vehicle.id)) {
-            vehiclesMap.set(vehicle.id, {
-                id: vehicle.id,
-                year: vehicle.year,
-                make: vehicle.make,
-                model: vehicle.model,
-                price: vehicle.price,
-                mileage: vehicle.mileage,
-                description: vehicle.description,
-                category: vehicle.category_name,
-                primaryImage: null,
-                images: []
-            });
-        }
-
-        if (vehicle.image_url) {
-            const current = vehiclesMap.get(vehicle.id);
-
-            const imageObj = {
-                url: vehicle.image_url,
-                alt: `${vehicle.year} ${vehicle.make} ${vehicle.model}`, // simple default alt
-                isPrimary: vehicle.is_primary
-            };
-
-            current.images.push(imageObj);
-
-            if (vehicle.is_primary) {
-                current.primaryImage = imageObj;
-            }
-        }
-    });
-
-    return Array.from(vehiclesMap.values());
+    // Map rows directly to vehicles
+    return result.rows.map(vehicle => ({
+        id: vehicle.id,
+        year: vehicle.year,
+        make: vehicle.make,
+        model: vehicle.model,
+        price: vehicle.price,
+        mileage: vehicle.mileage,
+        description: vehicle.description,
+        category: vehicle.category_name,
+        image: vehicle.image_url,
+        alt: vehicle.alt
+    }));
 };
 
 /**
- * Wrapper functions for convenience / backward compatibility
+ * Wrapper functions for convenience
  */
 export const getInventory = (sortBy = 'price') =>
     getVehiclesByCategory(null, sortBy);

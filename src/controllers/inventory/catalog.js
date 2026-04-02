@@ -18,8 +18,9 @@ export const vehicleCatalogPage = async (req, res, next) => {
 
     // Fetch the sorted vehicle list
     const vehicles = await getVehiclesByCategory(categoryId, sortBy);
+    
 
-    addCatalogSpecificStyles(res);
+    // addCatalogSpecificStyles(res);
     res.render('inventory/list', {
         title: 'Vehicle Inventory',
         currentSort: sortBy,

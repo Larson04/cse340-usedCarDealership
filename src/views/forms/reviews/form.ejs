@@ -1,78 +1,58 @@
 <%- include('../../partials/header.ejs') %>
 
 <main class="reviews-container">
-    <h1>Reviews</h1>
+    <h1><%= title %></h1>
+    <p>
+       Leave a review for one of our vehicles.
+    </p>
 
-    <!-- Admin/Employee Filters -->
-    <% if(user.role === 'admin' || user.role === 'employee') { %>
-        <section class="filters">
-            <form action="/reviews" method="GET" class="filter-form">
-                <!-- Filter by User -->
-                <label for="filterUser">User:</label>
-                <select name="userId" id="filterUser">
-                    <option value="">All Users</option>
-                    <% allUsers.forEach(u => { %>
-                        <option value="<%= u.id %>" <%= filter.userId == u.id ? 'selected' : '' %>><%= u.name %></option>
-                    <% }) %>
-                </select>
+    <form method="POST" action="/reviews" class="review-form">
+        <!-- Make field -->
+        <div class="form-group">
+            <label for="make">Make</label>
+            <input type="text" id="make"  name="make" placeholder="Enter the make" 
+            minlength="2" required>
+        </div>
 
-                <!-- Filter by Date -->
-                <label for="filterDate">Date:</label>
-                <input type="date" name="date" id="filterDate" value="<%= filter.date || '' %>">
+        <!-- Model field -->
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model" placeholder="Enter the model" minlength="2" required>
+        </div>
 
-                <button type="submit">Apply Filters</button>
-            </form>
-        </section>
-    <% } %>
+        <!-- Year field -->
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="text" id="year" name="year" placeholder="Enter the year" minlength="2" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="comment">comment</label>
+            <textarea id="comment" name="comment" rows="6" 
+            placeholder="Please provide details about the vehicle" 
+            minlength="10" required></textarea>
+        </div>
 
-    <!-- Reviews Table -->
-    <% if(reviews.length === 0) { %>
-        <p>No reviews found.</p>
-    <% } else { %>
-        <table class="reviews-table">
-            <thead>
-                <tr>
-                    <% if(user.role === 'admin' || user.role === 'employee') { %>
-                        <th>User</th>
-                    <% } %>
-                    <th>Vehicle</th>
-                    <th>Rating</th>
-                    <th>Comment</th>
-                    <th>Date Submitted</th>
-                    <% if(user.role === 'admin' || user.role === 'employee' || user.role === 'user') { %>
-                        <th>Actions</th>
-                    <% } %>
-                </tr>
-            </thead>
-            <tbody>
-                <% reviews.forEach(review => { %>
-                    <tr>
-                        <% if(user.role === 'admin' || user.role === 'employee') { %>
-                            <td><%= review.userName %></td>
-                        <% } %>
-                        <td><%= review.vehicle %></td>
-                        <td><%= review.rating %> Star<%= review.rating > 1 ? 's' : '' %></td>
-                        <td><%= review.comment %></td>
-                        <td><%= review.dateSubmitted.toDateString() %></td>
-                        <td>
-                            <% if(review.userId === user.id || user.role === 'admin' || user.role === 'employee') { %>
-                                <a href="/reviews/<%= review.id %>/edit" class="btn-action">Edit</a>
-                                <form action="/reviews/<%= review.id %>?_method=DELETE" method="POST" style="display:inline;">
-                                    <button type="submit" class="btn-action btn-delete">Delete</button>
-                                </form>
-                            <% } else { %>
-                                N/A
-                            <% } %>
-                        </td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } %>
+        <div class="form-group rating">
+            <input type="radio" name="rating" id="star5" value="5" required>
+            <label for="star5">★</label>
 
-    <% if(user.role === 'user') { %>
-        <a href="/reviews/new" class="btn-submit">Leave a Review</a>
-    <% } %>
+            <input type="radio" name="rating" id="star4" value="4">
+            <label for="star4">★</label>
+
+            <input type="radio" name="rating" id="star3" value="3">
+            <label for="star3">★</label>
+
+            <input type="radio" name="rating" id="star2" value="2">
+            <label for="star2">★</label>
+
+            <input type="radio" name="rating" id="star1" value="1">
+            <label for="star1">★</label>
+        </div>
+
+        <!-- Submit button -->
+         <button type="submit">Submit</button>
+    </form>
 </main>
 
 <%- include('../../partials/footer.ejs') %>
