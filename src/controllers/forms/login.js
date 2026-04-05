@@ -5,15 +5,10 @@ import { loginValidation } from '../../middleware/validation/forms.js';
 
 const router = Router();
 
-const addLoginSpecificStyles = (res) => {
-    res.addStyle('<link rel="stylesheet" href="/css/login.css">');
-};
-
 /**
  * Display the login form.
  */
 const showLoginForm = (req, res) => {
-    addLoginSpecificStyles(res);
     res.render('forms/login/form', { 
         title: 'User Login' 
     });

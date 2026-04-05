@@ -48,6 +48,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body{
@@ -194,14 +195,19 @@ main{
     display: grid;
     gap: calc(var(--base-spacing ) * 1.5);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: auto 200px 50px;
     align-items: center;
     .vehicle-card{
+        display: grid;
+        grid-row: span 3;
+        grid-template-rows: subgrid;
         width: 100%;
         background-color: var(--color-primary);
         border-radius: var(--border-radius);
         margin-bottom: var(--base-spacing);
         text-align: center;
         padding: var(--base-spacing);
+        box-sizing: border-box;
 
         a{
             text-decoration: none;
@@ -249,6 +255,82 @@ main{
                 grid-area: date;
                 text-align: center;
             }
+        }
+    }
+}
+
+@supports (grid-template-rows: subgrid) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-auto-rows: auto 200px 50px;
+    }
+    .card {
+        grid-row: span 3;
+        grid-template-rows: subgrid;
+    }
+}
+
+ul{
+    list-style: none;
+}
+.why-us{
+    padding: var(--base-spacing);
+}
+
+.services{
+    background-color: var(--color-secondary);
+    width: 100%;
+    padding: var(--base-spacing);
+    display: flex;
+    flex-direction: column;
+    ul{
+        align-self: center;
+        background-color: var(--color-background);
+        padding: var(--base-spacing);
+        border-radius: var(--border-radius);
+        
+    }
+}
+
+.reviews{
+    padding: var(--base-spacing);
+}
+
+.contact{
+    background-color: var(--color-accent);
+    width: 100%;
+    padding: var(--base-spacing);
+    display: flex;
+    flex-direction: column;
+    p{
+        color: var(--color-text-accent);
+    }
+}
+
+.cta{
+    padding: var(--base-spacing);
+
+    a{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: 0.9rem;
+        transition: color var(--transition-base);
+        &:hover{
+            color: var(--color-link);
+        }
+        &::after{
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-link);
+            transition: width var(--transition-base);
+        }
+        &:hover::after{
+            width: 100%;
         }
     }
 }

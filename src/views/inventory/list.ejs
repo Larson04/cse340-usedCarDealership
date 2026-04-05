@@ -13,18 +13,21 @@
     </div>
 
     <!-- Vehicle List -->
-    <div class="vehicle-list">
+    <div class="vehicle-grid">
         <% vehicles.forEach(vehicle => { %>
             <div class="vehicle-card">
                 <a href="/inventory/<%= vehicle.id %>">
                     <img 
+                        class="vehicle-image"
                         src="<%= vehicle.image %>" 
                         alt="<%= vehicle.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
                     <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
                 </a>
-                <p>Category: <%= vehicle.category %></p>
-                <p>Mileage: <%= vehicle.mileage.toLocaleString() %> miles</p>
-                <p>Price: $<%= vehicle.price.toLocaleString() %></p>
+                <div class="vehicle-info">
+                    <p>Category: <%= vehicle.category %></p>
+                    <p>Mileage: <%= vehicle.mileage.toLocaleString() %> miles</p>
+                    <p>Price: $<%= vehicle.price.toLocaleString() %></p>
+                </div>
             </div>
         <% }) %>
     </div>

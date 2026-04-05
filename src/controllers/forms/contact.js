@@ -5,15 +5,10 @@ import { contactValidation } from '../../middleware/validation/forms.js';
 
 const router = Router();
 
-const addContactSpecificStyles = (res) => {
-    res.addStyle('<link rel="stylesheet" href="/css/contact.css">');
-};
-
 /**
  * Display the contact form page.
  */
 const showContactForm = (req, res) => {
-    addContactSpecificStyles(res);
     res.render('forms/contact/form', {
         title: 'Contact Us'
     });

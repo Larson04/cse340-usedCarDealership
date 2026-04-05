@@ -4,3 +4,66 @@
     box-sizing: border-box;
 }
 
+.vehicle-grid{
+    display: grid;
+    gap: calc(var(--base-spacing ) * 1.5);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    .vehicle-card{
+        width: 100%;
+        background-color: var(--color-primary);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--base-spacing);
+        text-align: center;
+        padding: var(--base-spacing);
+        box-sizing: border-box;
+
+        a{
+            text-decoration: none;
+            
+            h3{
+                color: var(--color-text);
+            }
+    
+            .vehicle-image{
+                width: 100%;
+                border-radius: var(--border-radius);
+            }
+        }
+
+        .vehicle-info {
+            display: grid;
+            grid-template-areas:
+            "description description"
+            "price price"
+            "date date";
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
+            background-color: var(--color-background);
+            border-radius: var(--border-radius);
+            align-items: center;
+            
+            .description{
+                grid-area: description;
+                text-align: center;
+            }
+
+            .price{
+                grid-area: price;
+                background-color: var(--color-button);
+                color: var(--color-text);
+                border: none;
+                border-radius: calc(var(--border-radius) * .5);
+                padding: calc(var(--base-spacing) * .5) calc(var(--base-spacing) * .35);
+                cursor: pointer;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .date{
+                grid-area: date;
+                text-align: center;
+            }
+        }
+    }
+}
