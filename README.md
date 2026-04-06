@@ -1,7 +1,6 @@
 
 2. Database Schema: An image of your entity relation diagram (ERD) exported from
 pgAdmin showing your tables and relationships
-5. Known Limitations: Any features you did not complete or bugs you are aware of
 
 **Project Description**
 
@@ -35,3 +34,17 @@ admin@example.com
 
 
 **Known Limitations**
+
+- Different User abilities other than Admin can delete users.
+
+- Review processing/viewing
+
+- Service requests
+
+- All employee Privliges besides viewing Contact Form Submissions
+- Admin vehicle and cetegory manipulation
+
+
+**CSS Project Update**
+
+I now have a gradient background, and some inline svgs for the social media icons in the footer. I also have some transitions for the button hovers in teh nav and forms. 

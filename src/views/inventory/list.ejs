@@ -4,7 +4,7 @@
 
     <!-- Sort Options -->
     <div class="filter-buttons">
-        <span>Sort by:</span>
+        <p>Sort by:</p>
         <a href="?sort=category" class="filter-button <%= currentSort === 'category' ? 'active' : '' %>">Category</a> |
         <a href="?sort=make" class="filter-button <%= currentSort === 'make' ? 'active' : '' %>">Make</a> |
         <a href="?sort=model" class="filter-button <%= currentSort === 'model' ? 'active' : '' %>">Model</a> |
@@ -24,9 +24,10 @@
                     <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
                 </a>
                 <div class="vehicle-info">
-                    <p>Category: <%= vehicle.category %></p>
-                    <p>Mileage: <%= vehicle.mileage.toLocaleString() %> miles</p>
-                    <p>Price: $<%= vehicle.price.toLocaleString() %></p>
+                    <p class="category">Category: <%= vehicle.category %></p>
+                    <p class="mileage">Mileage: <%= vehicle.mileage.toLocaleString() %> miles</p>
+                    <p class="price">Price: $<%= vehicle.price.toLocaleString() %></p>
+                    <p class="date">Created at: <%= vehicle.createdAt %> | Updated At:<%= vehicle.updatedAt %></p>
                 </div>
             </div>
         <% }) %>

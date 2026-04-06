@@ -4,17 +4,20 @@
     box-sizing: border-box;
 }
 
+body{
+    width: 100%;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+}
+
 .filter-buttons{
-    width: 35%;
+    margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     max-width: var(--max-width);
     justify-content: space-between;
-
-    span{
-        width: 100%;
-    }
 
     .filter-button{
         padding: 2px;
@@ -44,6 +47,7 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-auto-rows: auto 200px 50px;
     align-items: center;
+    padding: 0.5rem;
 
     .vehicle-card{
         display: grid;
@@ -59,10 +63,7 @@
 
         a{
             text-decoration: none;
-            
-            h3{
-                color: var(--color-text);
-            }
+            color: var(--color-text-accent);
     
             .vehicle-image{
                 width: 100%;
@@ -73,12 +74,33 @@
         .vehicle-info {
             display: flex;
             flex-direction: column;
+            gap: var(--base-spacing);
+            justify-content: space-between;
+            padding: var(--base-spacing);
+            height: 100%;
             background-color: var(--color-background);
             border-radius: var(--border-radius);
             align-items: center;
             
-            .description{
-                grid-area: description;
+            .mileage{
+                grid-area: mileage;
+                text-align: center;
+            }
+
+            .price{
+                grid-area: price;
+                background-color: var(--color-button);
+                color: var(--color-text);
+                border: none;
+                border-radius: calc(var(--border-radius) * .5);
+                padding: calc(var(--base-spacing) * .5) calc(var(--base-spacing) * .35);
+                cursor: pointer;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .date{
+                grid-area: date;
                 text-align: center;
             }
         }
@@ -96,5 +118,10 @@
     }
 }
 
+@media (min-width: 768px) {
+    .vehicle-grid{
+        width: 90%;
+    }
+}
 
 

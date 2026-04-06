@@ -36,7 +36,8 @@
                     <img class="vehicle-image" src="<%= vehicle.image %>" alt="<%= vehicle.alt || vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model %>">
                 </a>
                 <div class="vehicle-info">
-                    <p class="description"><%= vehicle.description %> <%= vehicle.mileage %></p>
+                    <p class="description"><%= vehicle.description %></p>
+                    <p class="mileage">Mileage: <%= vehicle.mileage %></p>
                     <p class="price">$<%= vehicle.price.toLocaleString() %></p>
                     <p class="date">Created at: <%= vehicle.createdAt %> | Updated At:<%= vehicle.updatedAt %></p>
                 </div>
@@ -46,64 +47,52 @@
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
-    <section class="why-us">
-        <h2>Why Choose Us</h2>
-        <ul>
-            <li>★ Thoroughly inspected, reliable vehicles</li>
-            <li>★ Competitive, transparent pricing</li>
-            <li>★ Financing options for all credit types</li>
-            <li>★ Friendly, no-pressure sales team</li>
-            <li>★ Trusted by local customers</li>
-        </ul>
-    </section>
+    <div class="info-container">
+        <!-- WHY CHOOSE US -->
+        <section class="why-us">
+            <h2>Why Choose Us</h2>
+            <ul>
+                <li>★ Thoroughly inspected, reliable vehicles</li>
+                <li>★ Competitive, transparent pricing</li>
+                <li>★ Financing options for all credit types</li>
+                <li>★ Friendly, no-pressure sales team</li>
+                <li>★ Trusted by local customers</li>
+            </ul>
+        </section>
 
-    <!-- SERVICES -->
-    <section class="services">
-        <h2>Our Services</h2>
-        <ul>
-            <li>★ Vehicle trade-ins</li>
-            <li>★ Maintenance and service referrals</li>
-            <li>★ Extended warranties</li>
-            <li>★ Vehicle history reports</li>
-        </ul>
-    </section>
+        <!-- SERVICES -->
+        <section class="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>★ Vehicle trade-ins</li>
+                <li>★ Maintenance and service referrals</li>
+                <li>★ Extended warranties</li>
+                <li>★ Vehicle history reports</li>
+            </ul>
+        </section>
 
-    <!-- REVIEWS -->
-    <section class="reviews">
-        <h2>Customer Reviews</h2>
-        <div class="review">
-            <p>“Great experience! The process was smooth and the staff was very helpful.”</p>
-        </div>
-        <div class="review">
-            <p>“Found exactly what I needed at a great price.”</p>
-        </div>
-        <div class="review">
-            <p>“Honest dealership with quality cars.”</p>
-        </div>
-    </section>
+        <!-- REVIEWS -->
+        <section class="reviews">
+            <h2>Customer Reviews</h2>
+            <div class="review">
+                <p>“Great experience! The process was smooth and the staff was very helpful.”</p>
+            </div>
+            <div class="review">
+                <p>“Found exactly what I needed at a great price.”</p>
+            </div>
+            <div class="review">
+                <p>“Honest dealership with quality cars.”</p>
+            </div>
+        </section>
 
-    <!-- CONTACT -->
-    <section class="contact">
-        <h2>Contact Us</h2>
-        <p> address</p>
-        <p> phone</p>
-        <p> email</p>
-
-        <h3>Hours</h3>
-        <p>Mon-Fri: 9AM-7PM</p>
-        <p>Sat: 9AM-6PM</p>
-        <p>Sun: Closed</p>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="cta">
-        <h2>Ready to find your next car?</h2>
-        <div class="cta-links">
-            <a href="/inventory">Browse Inventory</a> |
-            <a href="/contact">Contact Us</a>
-        </div>
-    </section>
-    
+        <!-- FINAL CTA -->
+        <section class="cta">
+            <h2>Ready to find your next car?</h2>
+            <div class="cta-links">
+                <a href="/inventory">Browse Inventory</a> |
+                <a href="/contact">Contact Us</a>
+            </div>
+        </section>
+    </div>
 </main>
 <%- include('./partials/footer.ejs') %>

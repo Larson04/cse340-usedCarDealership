@@ -38,6 +38,12 @@ router.use('/login', (req, res, next) => {
     next();
 });
 
+// Add review-specific styles to all registration routes
+router.use('/reviews', (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/reviews.css">');
+    next();
+});
+
 // Home and basic pages
 router.get('/', homePage);
 
